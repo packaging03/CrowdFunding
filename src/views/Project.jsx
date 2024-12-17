@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProjectDetails from "../components/ProjectDetails";
-// import BackProject from "../components/BackProject";
-// import DeleteProject from "../components/DeleteProject";
-// import ProjectBackers from "../components/ProjectBackers";
+import BackProject from "../components/BackProject";
+import DeleteProject from "../components/DeleteProject";
+import ProjectBackers from "../components/ProjectBackers";
 // import ProjectDetails from "../components/ProjectDetails";
-// import UpdateProject from "../components/UpdateProject";
+import UpdateProject from "../components/UpdateProject";
 // import { getBackers, loadProject } from "../services/blockchain";
 // import { useGlobalState } from "../store";
 
