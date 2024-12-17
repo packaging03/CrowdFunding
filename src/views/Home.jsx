@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 // import AddButton from "../components/AddButton";
-// import CreateProject from "../components/CreateProject";
+import CreateProject from "../components/CreateProject";
 import Hero from "../components/Hero";
 import Projects from "../components/Projects";
 import AddButton from "../components/AddButton";
@@ -18,7 +18,7 @@ const Home = () => {
     <>
       <Hero />
       <Projects projects={null} />
-      {/* <CreateProject /> */}
+      <CreateProject />
       <AddButton />
     </>
   );

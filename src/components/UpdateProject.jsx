@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";
-// import { createProject } from "../services/blockchain";
+import { updateProject } from "../services/blockchain";
 import { useGlobalState, setGlobalState } from "../store";
 
-const CreateProject = () => {
-  const [createModal] = useGlobalState("createModal");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [cost, setCost] = useState("");
-  const [date, setDate] = useState("");
-  const [imageURL, setImageURL] = useState("");
+const UpdateProject = ({ project }) => {
+  const [updateModal] = useGlobalState("updateModal");
+  const [title, setTitle] = useState(project?.title);
+  const [description, setDescription] = useState(project?.description);
+  const [date, setDate] = useState(project?.date);
+  const [imageURL, setImageURL] = useState(project?.imageURL);
 
   const toTimestamp = (dateStr) => {
     const dateObj = Date.parse(dateStr);
@@ -19,39 +18,30 @@ const CreateProject = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!title || !description || !cost || !date || !imageURL) return;
+    if (!title || !description || !date || !imageURL) return;
 
     const params = {
+      id: project?.id,
       title,
       description,
-      cost,
       expiresAt: toTimestamp(date),
       imageURL,
     };
 
-    await createProject(params);
-    toast.success("Project created successfully, will reflect in 30sec.");
+    await updateProject(params);
+    toast.success("Project updated successffully, will reflect in 30sec.");
     onClose();
   };
 
   const onClose = () => {
-    setGlobalState("createModal", "scale-0");
-    reset();
-  };
-
-  const reset = () => {
-    setTitle("");
-    setCost("");
-    setDescription("");
-    setImageURL("");
-    setDate("");
+    setGlobalState("updateModal", "scale-0");
   };
 
   return (
     <div
       className={`fixed top-0 left-0 w-screen h-screen flex
     items-center justify-center bg-black bg-opacity-50
-    transform transition-transform duration-300 ${createModal}`}
+    transform transition-transform duration-300 ${updateModal}`}
     >
       <div
         className="bg-white shadow-xl shadow-black
@@ -59,7 +49,7 @@ const CreateProject = () => {
       >
         <form onSubmit={handleSubmit} className="flex flex-col">
           <div className="flex justify-between items-center">
-            <p className="font-semibold">Add Project</p>
+            <p className="font-semibold">Edit Project</p>
             <button
               onClick={onClose}
               type="button"
@@ -95,25 +85,6 @@ const CreateProject = () => {
               placeholder="Title"
               onChange={(e) => setTitle(e.target.value)}
               value={title}
-              required
-            />
-          </div>
-
-          <div
-            className="flex justify-between items-center
-          bg-gray-300 rounded-xl mt-5"
-          >
-            <input
-              className="block w-full bg-transparent
-            border-0 text-sm text-slate-500 focus:outline-none
-            focus:ring-0"
-              type="number"
-              step={0.01}
-              min={0.01}
-              name="cost"
-              placeholder="cost (ETH)"
-              onChange={(e) => setCost(e.target.value)}
-              value={cost}
               required
             />
           </div>
@@ -175,7 +146,7 @@ const CreateProject = () => {
             text-white font-medium text-md leading-tight
             rounded-full shadow-md hover:bg-green-700 mt-5"
           >
-            Submit Project
+            Update Project
           </button>
         </form>
       </div>
@@ -183,4 +154,4 @@ const CreateProject = () => {
   );
 };
 
-export default CreateProject;
+export default UpdateProject;
