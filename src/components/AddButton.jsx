@@ -1,4 +1,4 @@
-// import { setGlobalState } from "../store";
+import { setGlobalState } from "../store";
 import { BsPlusLg } from "react-icons/bs";
 
 const AddButton = () => {
@@ -9,7 +9,7 @@ const AddButton = () => {
         className="flex justify-center items-center w-9 h-9 bg-green-600
         text-white font-medium text-xs leading-tight uppercase
         rounded-full shadow-md hover:bg-green-700"
-        // onClick={() => setGlobalState("createModal", "scale-100")}
+        onClick={() => setGlobalState("createModal", "scale-100")}
       >
         <BsPlusLg className="font-bold" size={20} />
       </button>
